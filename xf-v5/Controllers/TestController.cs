@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using xf_v5.Models;
 
-namespace WA_XForward_Api_Test.Controllers
+namespace xf_v5.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class TestController : ControllerBase
     {
+
         [HttpGet]
-        public IActionResult GetClientIp()
+        public IActionResult GetClientIp()//[FromHeader(Name = "X-Forwarded-For")] string xf )
         {
-            var connectionInfo = new ConnectionInfo
+            var connectionInfo = new Models.ConnectionInfo
             {
                 LocalIpAddress = HttpContext.Connection.LocalIpAddress.ToString(),
                 LocalPort = HttpContext.Connection.LocalPort,
@@ -19,9 +22,15 @@ namespace WA_XForward_Api_Test.Controllers
                 RequestHost = HttpContext.Request.Host.ToString(),
                 RequestScheme = HttpContext.Request.Scheme
             };
+
             connectionInfo.HeaderData = new List<StringKeyValue>();
             foreach (var k in HttpContext.Request.Headers.Keys)
-                connectionInfo.HeaderData.Add(new StringKeyValue() { Key = k, Value = HttpContext.Request.Headers[k] }); 
+                connectionInfo.HeaderData.Add(new StringKeyValue()
+                {
+                    Key = k,
+                    Value = HttpContext.Request.Headers[k]
+                });
+            //connectionInfo.HeaderData.Add(new StringKeyValue() { Key = "xf", Value = xf });
             return Ok(connectionInfo);
         }
     }

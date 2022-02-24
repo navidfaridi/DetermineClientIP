@@ -1,5 +1,17 @@
-﻿namespace WA_XForward_Api_Test
+﻿using System.Collections.Generic;
+
+namespace xf_v5.Models
 {
+    public class CorsOptions
+    {
+        public string[] AllowedHosts { get; set; }
+    }
+    public class XForwardedOptions
+    {
+        public bool Enabled { get; set; }
+        public int ForwardLimit { get; set; }
+    }
+
     public class StringKeyValue
     {
         public string Key { get; set; }
