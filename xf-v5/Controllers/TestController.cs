@@ -22,15 +22,14 @@ namespace xf_v5.Controllers
                 RequestHost = HttpContext.Request.Host.ToString(),
                 RequestScheme = HttpContext.Request.Scheme
             };
-
-            connectionInfo.HeaderData = new List<StringKeyValue>();
+            
+            connectionInfo.HeaderData = new Dictionary<string, string>();
             foreach (var k in HttpContext.Request.Headers.Keys)
-                connectionInfo.HeaderData.Add(new StringKeyValue()
-                {
-                    Key = k,
-                    Value = HttpContext.Request.Headers[k]
-                });
-            //connectionInfo.HeaderData.Add(new StringKeyValue() { Key = "xf", Value = xf });
+            {
+                var v = HttpContext.Request.Headers[k];
+                connectionInfo.HeaderData.Add(k, v);              
+            }
+            
             return Ok(connectionInfo);
         }
     }

@@ -12,11 +12,6 @@ namespace xf_v5.Models
         public int ForwardLimit { get; set; }
     }
 
-    public class StringKeyValue
-    {
-        public string Key { get; set; }
-        public string Value { get; set; }
-    }
     public class ConnectionInfo
     {
         public string LocalIpAddress { get; set; }
@@ -25,6 +20,6 @@ namespace xf_v5.Models
         public int RemotePort { get; set; }
         public string RequestHost { get; set; }
         public string RequestScheme { get; set; }
-        public List<StringKeyValue> HeaderData { get; set; }
+        public Dictionary<string,string> HeaderData { get; set; }        
     }
 }
