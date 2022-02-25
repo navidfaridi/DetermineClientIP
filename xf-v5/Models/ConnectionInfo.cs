@@ -20,6 +20,8 @@ namespace xf_v5.Models
         public int RemotePort { get; set; }
         public string RequestHost { get; set; }
         public string RequestScheme { get; set; }
-        public Dictionary<string,string> HeaderData { get; set; }        
+        public Dictionary<string, string> HeaderData { get; set; }
+        public Dictionary<string, string> QueryData { get; set; }
+        public Dictionary<string, string> FormData { get; set; }
     }
 }
